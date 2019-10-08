@@ -26,11 +26,10 @@ module "vdc_hub_firewall" {
 
   firewall_name             = "${var.firewall_name}"
 
-  resource_group_name       = "${var.firewall_resource_group_name}"
+  resource_group_name       = "${module.vdc_hub_vnet.resource_group_name}"
   location                  = "${var.location}"
 
   vnet_name                 = "${module.vdc_hub_vnet.vnet_name}"
-  vnet_resource_group_name  = "${module.vdc_hub_vnet.resource_group_name}"
 
   firewall_subnet_prefix    = "${var.firewall_subnet_prefix}"
   firewall_public_ip_name   = "${var.firewall_name}-pip"

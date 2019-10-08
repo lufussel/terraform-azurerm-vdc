@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "firewall" {
 resource "azurerm_subnet" "firewall" {
   name                      = "AzureFirewallSubnet"
   virtual_network_name      = "${var.vnet_name}"
-  resource_group_name       = "${var.vnet_resource_group_name}"
+  resource_group_name       = "${var.resource_group_name}"
   address_prefix            = "${var.firewall_subnet_prefix}"
 }
 

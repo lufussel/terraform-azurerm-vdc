@@ -18,11 +18,6 @@ variable "vnet_name" {
   default     = "hub-vnet"
 }
 
-variable "vnet_resource_group_name" {
-  description = "The name of the resource group in which to create the firewall subnet."
-  default     = "hub-vnet-rg"
-}
-
 variable "firewall_subnet_prefix" {
   description = "The address prefixes to associate to the firewall subnet."
   default     = "10.0.0.0/24"
