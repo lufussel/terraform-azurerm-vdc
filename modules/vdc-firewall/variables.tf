@@ -32,3 +32,13 @@ variable "firewall_public_ip_name" {
   description = "The name of the firewall public IP address. Changing this forces a new resource to be created."
   default     = "hub-fw-pip"
 }
+
+variable "tags" {
+  description = "A mapping of tags to assign to the resource."
+  type        = "map"
+
+  default = {
+    application = "vdc-hub"
+    environment = "development"
+  }
+}
