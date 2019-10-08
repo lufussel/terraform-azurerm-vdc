@@ -12,7 +12,7 @@ resource "azurerm_virtual_network" "vnet" {
   tags                = "${var.tags}"
 }
 
-resource "azurerm_subnet" "hub_subnet" {
+resource "azurerm_subnet" "subnet" {
   name                      = "${var.subnet_names[count.index]}"
   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
   resource_group_name       = "${azurerm_resource_group.vnet.name}"
