@@ -33,6 +33,21 @@ variable "hub_subnet_prefixes" {
   default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 }
 
+variable "firewall_subnet_prefix" {
+  description = "The address prefixes to associate to the firewall subnet."
+  default     = "10.0.0.0/24"
+}
+
+variable "firewall_name" {
+  description = "The name of the virtual network. Changing this forces a new resource to be created."
+  default     = "hub-fw"
+}
+
+variable "firewall_resource_group_name" {
+  description = "The name of the resource group in which to create the virtual network."
+  default     = "hub-fw-rg"
+}
+
 variable "tags" {
   description = "A mapping of tags to assign to the resource."
   type        = "map"
