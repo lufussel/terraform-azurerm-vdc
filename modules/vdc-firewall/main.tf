@@ -16,12 +16,14 @@ resource "azurerm_public_ip" "firewall" {
   resource_group_name       = "${azurerm_resource_group.firewall.name}"
   allocation_method         = "Static"
   sku                       = "Standard"
+  tags                      = "${var.tags}"
 }
 
 resource "azurerm_firewall" "firewall" {
   name                      = "${var.firewall_name}"
   location                  = "${azurerm_resource_group.firewall.location}"
   resource_group_name       = "${azurerm_resource_group.firewall.name}"
+  tags                      = "${var.tags}"
 
   ip_configuration {
     name                    = "configuration"
