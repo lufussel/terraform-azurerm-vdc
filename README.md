@@ -1,5 +1,7 @@
 # terraform-azurerm-vdc
 
+![](https://github.com/lufussel/terraform-azurerm-vdc/workflows/build/badge.svg)
+
 ## Create a Virtual Datacenter environment
 
 This Terraform module deploys a number of resources based on [Microsoft Cloud Adoption Framework for Azure](https://aka.ms/caf) and [Azure Virtual Datacenter](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/reference/vdc) principals with basic inputs to provision the environment.
