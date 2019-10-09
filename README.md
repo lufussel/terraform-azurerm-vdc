@@ -8,6 +8,12 @@ This Terraform module deploys a number of resources based on [Microsoft Cloud Ad
 
 This module aims to be used as a base to develop an enterprise Virtual Datacenter environment.
 
+The `terraform-azurerm-vdc` module deploys resources which act as a hub. A hub is the central network zone that controls and inspects ingress or egress traffic between different zones: internet, on-premises, and the spokes. 
+
+An enterprise cloud environment may have multiple hubs across different regions and different environments.
+
+This module is a complement to the `terraform-azurerm-vdc-spoke` module.
+
 ## Usage
 
 ```hcl
