@@ -23,8 +23,21 @@ jobs:
         AZURE_SERVICE_TENANT: ${{ secrets.AZURE_SERVICE_TENANT }}
         AZURE_SUBSCRIPTION: ${{ secrets.AZURE_SUBSCRIPTION }}
 
-    - name: terraform-init
+    - name: Run terraform-init
       uses: hashicorp/terraform-github-actions/init@v0.4.4
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
+
+    - name: Run terraform-validate
+      uses: hashicorp/terraform-github-actions/validate@v0.4.4
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: "."
+    
+    - name: Run terraform-plan
+      uses: hashicorp/terraform-github-actions/plan@v0.4.4
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: "."
+        TF_ACTION_WORKSPACE: "default"
