@@ -3,7 +3,7 @@ name: build
 on: [push]
 
 jobs:
-  terraform-build:
+  terraform-integration:
     runs-on: ubuntu-latest
 
     steps:
