@@ -1,6 +1,6 @@
 # terraform-azurerm-vdc
 
-![](https://github.com/lufussel/terraform-azurerm-vdc/workflows/build/badge.svg)
+![](https://github.com/lufussel/terraform-azurerm-vdc-hub/workflows/build/badge.svg)
 
 ## Create a Virtual Datacenter environment
 
