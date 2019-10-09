@@ -15,19 +15,59 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
 
-    - uses: Azure/github-actions/login@master
-      env: 
-        AZURE_SERVICE_APP_ID: ${{ secrets.AZURE_SERVICE_APP_ID }}
-        AZURE_SERVICE_PASSWORD: ${{ secrets.AZURE_SERVICE_PASSWORD }}
-        AZURE_SERVICE_TENANT: ${{ secrets.AZURE_SERVICE_TENANT }}
-        AZURE_SUBSCRIPTION: ${{ secrets.AZURE_SUBSCRIPTION }}
-
-    - uses: hashicorp/terraform-github-actions/init@v0.4.4
+    - name: Run terraform init
+      uses: hashicorp/terraform-github-actions/init@v0.4.4
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
     
-    - uses: hashicorp/terraform-github-actions/validate@v0.4.4
+    - name: Run terraform validate
+      uses: hashicorp/terraform-github-actions/validate@v0.4.4
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
+
+    - name: Run terraform-plan
+      uses: hashicorp/terraform-github-actions/plan@v0.4.4
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: "."
+        TF_ACTION_WORKSPACE: "default"
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_SERVICE_TENANT }}
+
+    - name: Run terraform apply
+      uses: hashicorp/terraform-github-actions/apply@v0.4.4
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: "."
+        TF_ACTION_WORKSPACE: "default"
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_SERVICE_TENANT }}
+
+    - name: Run terraform plan -destroy
+      uses: lufussel/terraform-github-actions/plandestroy@v0.4.9
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: "."
+        TF_ACTION_WORKSPACE: "default"
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_SERVICE_TENANT }}
+
+    - name: Run terraform-destroy
+      uses: lufussel/terraform-github-actions/destroy@v0.4.9
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: "."
+        TF_ACTION_WORKSPACE: "default"
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_SERVICE_TENANT }}
+
