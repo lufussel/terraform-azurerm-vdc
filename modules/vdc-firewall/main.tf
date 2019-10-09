@@ -1,9 +1,3 @@
-resource "azurerm_resource_group" "firewall" {
-  name                      = "${var.resource_group_name}"
-  location                  = "${var.location}"
-  tags                      = "${var.tags}"
-}
-
 resource "azurerm_subnet" "firewall" {
   name                      = "AzureFirewallSubnet"
   virtual_network_name      = "${var.vnet_name}"
@@ -13,8 +7,8 @@ resource "azurerm_subnet" "firewall" {
 
 resource "azurerm_public_ip" "firewall" {
   name                      = "${var.firewall_public_ip_name}"
-  location                  = "${azurerm_resource_group.firewall.location}"
-  resource_group_name       = "${azurerm_resource_group.firewall.name}"
+  location                  = "${azurerm_subnet.firewall.location}"
+  resource_group_name       = "${var.resource_group_name}"
   allocation_method         = "Static"
   sku                       = "Standard"
   tags                      = "${var.tags}"
@@ -22,8 +16,8 @@ resource "azurerm_public_ip" "firewall" {
 
 resource "azurerm_firewall" "firewall" {
   name                      = "${var.firewall_name}"
-  location                  = "${azurerm_resource_group.firewall.location}"
-  resource_group_name       = "${azurerm_resource_group.firewall.name}"
+  location                  = "${azurerm_subnet.firewall.location}"
+  resource_group_name       = "${azurerm_subnet.firewall.resource_group_name}"
   tags                      = "${var.tags}"
 
   ip_configuration {
