@@ -17,5 +17,5 @@ jobs:
         echo test, and deploy your project.
 
     - uses: Azure/github-actions/login@master
-    - with: 
-      secrets: ["AZURE_SERVICE_APP_ID", "AZURE_SERVICE_PASSWORD", "AZURE_SERVICE_TENANT"]
+    - name: Azure Login
+    - secrets: ["AZURE_SERVICE_APP_ID", "AZURE_SERVICE_PASSWORD", "AZURE_SERVICE_TENANT"]
