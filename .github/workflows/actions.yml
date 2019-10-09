@@ -8,12 +8,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
 
     - name: Run terraform init
       uses: hashicorp/terraform-github-actions/init@v0.4.4
@@ -60,7 +54,7 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION }}
         ARM_TENANT_ID: ${{ secrets.AZURE_SERVICE_TENANT }}
 
-    - name: Run terraform-destroy
+    - name: Run terraform destroy
       uses: lufussel/terraform-github-actions/destroy@v0.4.9
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
