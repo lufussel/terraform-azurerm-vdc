@@ -23,6 +23,11 @@ jobs:
         AZURE_SERVICE_TENANT: ${{ secrets.AZURE_SERVICE_TENANT }}
         AZURE_SUBSCRIPTION: ${{ secrets.AZURE_SUBSCRIPTION }}
 
+    - uses: Azure/github-actions/cli@master
+      env: 
+        AZURE_SCRIPT_PATH: ./scripts/set-terraform-environment.sh
+        AZURE_SCRIPT: set-terraform-environment.sh
+
     - name: Run terraform-init
       uses: hashicorp/terraform-github-actions/init@v0.4.4
       env: 
