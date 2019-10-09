@@ -18,4 +18,3 @@ jobs:
 
     - uses: Azure/github-actions/login@master
     - name: Azure Login
-    - secrets: ["AZURE_SERVICE_APP_ID", "AZURE_SERVICE_PASSWORD", "AZURE_SERVICE_TENANT"]
