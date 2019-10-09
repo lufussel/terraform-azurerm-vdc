@@ -4,23 +4,21 @@ on: [push]
 
 jobs:
   terraform-integration:
+    name: Terraform integration test
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v1
-
+    - name: Checkout
+      uses: actions/checkout@v1
     - name: Run terraform init
       uses: hashicorp/terraform-github-actions/init@v0.4.4
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
-    
     - name: Run terraform validate
       uses: hashicorp/terraform-github-actions/validate@v0.4.4
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
-
     - name: Run terraform-plan
       uses: hashicorp/terraform-github-actions/plan@v0.4.4
       env: 
@@ -31,7 +29,6 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION }}
         ARM_TENANT_ID: ${{ secrets.AZURE_SERVICE_TENANT }}
-
     - name: Run terraform apply
       uses: hashicorp/terraform-github-actions/apply@v0.4.4
       env: 
@@ -42,7 +39,6 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION }}
         ARM_TENANT_ID: ${{ secrets.AZURE_SERVICE_TENANT }}
-
     - name: Run terraform plan -destroy
       uses: lufussel/terraform-github-actions/plandestroy@v0.4.9
       env: 
@@ -53,7 +49,6 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION }}
         ARM_TENANT_ID: ${{ secrets.AZURE_SERVICE_TENANT }}
-
     - name: Run terraform destroy
       uses: lufussel/terraform-github-actions/destroy@v0.4.9
       env: 
@@ -64,4 +59,3 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION }}
         ARM_TENANT_ID: ${{ secrets.AZURE_SERVICE_TENANT }}
-
