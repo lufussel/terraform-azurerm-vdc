@@ -17,4 +17,3 @@ jobs:
         echo test, and deploy your project.
 
     - uses: Azure/github-actions/login@master
-    - name: Azure Login
