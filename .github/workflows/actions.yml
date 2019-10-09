@@ -50,8 +50,8 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION }}
         ARM_TENANT_ID: ${{ secrets.AZURE_SERVICE_TENANT }}
 
-    - name: Run terraform-destroy
-      uses: lufussel/terraform-github-actions/destroy@v0.4.5
+    - name: Run terraform-plan-destroy
+      uses: lufussel/terraform-github-actions/plan-destroy@v0.4.7
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
