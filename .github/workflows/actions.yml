@@ -22,3 +22,7 @@ jobs:
         AZURE_SERVICE_PASSWORD: ${{ secrets.AZURE_SERVICE_PASSWORD }}
         AZURE_SERVICE_TENANT: ${{ secrets.AZURE_SERVICE_TENANT }}
         AZURE_SUBSCRIPTION: ${{ secrets.AZURE_SUBSCRIPTION }}
+
+    - uses: actions/bin/filter@master
+      with:
+        args: "action 'opened|synchronize'"
