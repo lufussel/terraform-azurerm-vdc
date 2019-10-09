@@ -16,7 +16,7 @@ resource "azurerm_public_ip" "firewall" {
 
 resource "azurerm_firewall" "firewall" {
   name                      = "${var.firewall_name}"
-  location                  = "${azurerm_subnet.firewall.location}"
+  location                  = "${var.location}"
   resource_group_name       = "${azurerm_subnet.firewall.resource_group_name}"
   tags                      = "${var.tags}"
 
