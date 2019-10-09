@@ -16,12 +16,6 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
 
-  authenticate:
-
-    runs-on: ubuntu-latest
-
-    steps:
     - uses: Azure/github-actions/login@master
-    - name: Azure Login
     - with: 
       secrets: ["AZURE_SERVICE_APP_ID", "AZURE_SERVICE_PASSWORD", "AZURE_SERVICE_TENANT"]
