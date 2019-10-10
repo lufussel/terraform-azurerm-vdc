@@ -10,45 +10,44 @@ env:
 
 jobs:
   terraform-integration:
-    name: Terraform integration tests
+    name: Terraform tests
     runs-on: ubuntu-latest
 
     steps:
-
-    - uses: actions/checkout@v1
-
-    - uses: hashicorp/terraform-github-actions/init@v0.4.4
+    - name: Checkout the repository
+      uses: actions/checkout@v1
+    - name: Run terraform init
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
-
-    - uses: hashicorp/terraform-github-actions/validate@v0.4.4
+      uses: hashicorp/terraform-github-actions/init@v0.4.4
+    - name: Run terraform validate
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
-
-    - uses: hashicorp/terraform-github-actions/plan@v0.4.4
-      env: 
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        TF_ACTION_WORKING_DIR: "."
-        TF_ACTION_WORKSPACE: "default"
-        
-
-    - uses: hashicorp/terraform-github-actions/apply@v0.4.4
+      uses: hashicorp/terraform-github-actions/validate@v0.4.4
+    - name: Run terraform plan
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
         TF_ACTION_WORKSPACE: "default"
-
-    - uses: lufussel/terraform-github-actions/plandestroy@v0.4.9
+      uses: hashicorp/terraform-github-actions/plan@v0.4.4
+    - name: Run terraform apply (building environment)
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
         TF_ACTION_WORKSPACE: "default"
-
-    - uses: lufussel/terraform-github-actions/destroy@v0.4.9
+      uses: hashicorp/terraform-github-actions/apply@v0.4.4
+    - name: Run terraform plan -destroy
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
         TF_ACTION_WORKSPACE: "default"
+      uses: lufussel/terraform-github-actions/plandestroy@v0.4.9
+    - name: Run terraform destroy (cleaning up environment)
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: "."
+        TF_ACTION_WORKSPACE: "default"
+      uses: lufussel/terraform-github-actions/destroy@v0.4.9
 
