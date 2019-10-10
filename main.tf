@@ -36,27 +36,3 @@ module "vdc_hub_firewall" {
 
   tags                      = "${var.tags}"
 }
-
-resource "azurerm_resource_group" "test" {
-  name                      = "adls-rg"
-  location                  = "westeurope"
-}
-
-resource "azurerm_storage_account" "test" {
-  name                     = "lufusseladlsgen2"
-  resource_group_name      = "${azurerm_resource_group.test.name}"
-  location                 = "${azurerm_resource_group.test.location}"
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-  account_kind             = "StorageV2"
-  is_hns_enabled           = "true"
-}
-
-resource "azurerm_storage_data_lake_gen2_filesystem" "test" {
-  name               = "example"
-  storage_account_id = "${azurerm_storage_account.test.id}"
-
-  properties = {
-    hello = "aGVsbG8="
-  }
-}
