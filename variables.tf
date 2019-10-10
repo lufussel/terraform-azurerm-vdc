@@ -5,7 +5,7 @@ variable "hub_vnet_name" {
 
 variable "hub_resource_group_name" {
   description = "The name of the resource group in which to create the virtual network."
-  default     = "hub-vnet-rg2"
+  default     = "hub-vnet-rg"
 }
 
 variable "location" {
