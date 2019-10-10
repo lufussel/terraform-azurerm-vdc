@@ -2,11 +2,11 @@ terraform {
   required_version          = ">= 0.12"
 }
 
-module "vdc_hub_vnet" {
+module "hub_network" {
   # When using these modules in your own templates, you will need to use a Git URL with a ref attribute that pins you
   # to a specific version of the modules, such as the following example:
   # source = "github.com/lufussel/terraform-azurerm-vdc/modules/vdc-hub-vnet?ref=v0.0.1"
-  source                    = "./modules/vdc-hub-vnet"
+  source                    = "./modules/hub-network"
 
   vnet_name                 = "${var.hub_vnet_name}"
 
@@ -21,8 +21,8 @@ module "vdc_hub_vnet" {
   tags                      = "${var.tags}"
 }
 
-module "vdc_hub_firewall" {
-  source                    = "./modules/vdc-firewall"
+module "firewall" {
+  source                    = "./modules/firewall"
 
   firewall_name             = "${var.firewall_name}"
 
