@@ -1,19 +1,29 @@
 output "vnet_id_cluster" {
-    value = "${module.vdc_hub_vnet.vnet_id}"
+    value = "${module.hub_network.vnet_id}"
 }
 
 output "vnet_name_cluster" {
-    value = "${module.vdc_hub_vnet.vnet_name}"
+    value = "${module.hub_network.vnet_name}"
 }
 
 output "location" {
-    value = "${module.vdc_hub_vnet.vnet_location}"
+    value = "${module.hub_network.vnet_location}"
 }
 
 output "vnet_address_space_cluster" {
-    value = "${module.vdc_hub_vnet.vnet_address_space}"
+    value = "${module.hub_network.vnet_address_space}"
 }
 
 output "vnet_subnets_cluster" {
-    value = "${module.vdc_hub_vnet.vnet_subnets}"
+    value = "${module.hub_network.vnet_subnets}"
+}
+
+output "firewall_id" {
+  description = "The id of the firewall."
+  value       = "${module.firewall.firewall_id}"
+}
+
+output "firewall_public_ip_id" {
+  description = "The address space of the virtual network."
+  value       = "${module.firewall.firewall_public_ip_id}"
 }
