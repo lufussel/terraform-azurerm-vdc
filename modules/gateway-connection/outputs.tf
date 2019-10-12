@@ -22,8 +22,3 @@ output "resource_group_name" {
   description = "The name of the resource group in which the virtual network gateway was created."
   value       = "${azurerm_local_network_gateway.gateway_connection.resource_group_name}"
 }
-
-output "gateway_location" {
-  description = "The location of the virtual network gateway."
-  value       = "${azurerm_virtual_network_gateway.gateway.location}"
-}
