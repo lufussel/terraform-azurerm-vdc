@@ -1,11 +1,11 @@
 variable "vnet_name" {
   description = "The name of the virtual network. Changing this forces a new resource to be created."
-  default     = "hub-vnet"
+  default     = "hub-network"
 }
 
 variable "resource_group_name" {
   description = "The name of the resource group in which to create the virtual network."
-  default     = "hub-vnet-rg"
+  default     = "hub-network-rg"
 }
 
 variable "location" {
@@ -14,7 +14,7 @@ variable "location" {
 }
 
 variable "address_space" {
-  description = "The address space that is used the virtual network. You can supply more than one address space."
+  description = "The address space that is used for the virtual network. You can supply more than one address space."
   default     = ["10.0.0.0/16"]
 }
 

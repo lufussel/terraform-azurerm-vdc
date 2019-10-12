@@ -14,6 +14,6 @@ output "firewall_subnet" {
 }
 
 output "firewall_public_ip_id" {
-  description = "The address space of the virtual network."
+  description = "The id of the public IP address of the firewall."
   value       = "${azurerm_public_ip.firewall.id}"
 }
