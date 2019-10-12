@@ -14,7 +14,7 @@ variable "location" {
 }
 
 variable "hub_address_space" {
-  description = "The address space that is used the virtual network. You can supply more than one address space."
+  description = "The address space that is used for the virtual network. You can supply more than one address space."
   default     = ["10.0.0.0/16"]
 }
 
@@ -34,18 +34,38 @@ variable "hub_subnet_prefixes" {
 }
 
 variable "firewall_subnet_prefix" {
-  description = "The address prefixes to associate to the firewall subnet."
+  description = "The address prefix to associate to the firewall subnet."
   default     = "10.0.0.0/24"
 }
 
 variable "firewall_name" {
-  description = "The name of the virtual network. Changing this forces a new resource to be created."
+  description = "The name of the firewall. Changing this forces a new resource to be created."
   default     = "hub-fw"
 }
 
-variable "firewall_resource_group_name" {
-  description = "The name of the resource group in which to create the virtual network."
+variable "gateway_name" {
+  description = "The name of the virtual network gateway. Changing this forces a new resource to be created."
+  default     = "hub-fw"
+}
+
+variable "gateway_resource_group_name" {
+  description = "The name of the resource group in which to create the virtual network gateway."
   default     = "hub-fw-rg"
+}
+
+variable "gateway_vnet_name" {
+  description = "The name of the virtual network in which to create the virtual network gateway. Changing this forces a new resource to be created."
+  default     = "hub-vnet"
+}
+
+variable "gateway_address_space" {
+  description = "The address space that is used for the virtual network gateway. You can supply more than one address space."
+  default     = ["10.0.0.0/16"]
+}
+
+variable "gateway_subnet_prefix" {
+  description = "The address prefix to associate to the gateway subnet."
+  default     = "10.0.0.0/24"
 }
 
 variable "tags" {

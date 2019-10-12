@@ -30,9 +30,24 @@ module "firewall" {
   location                  = "${var.location}"
 
   vnet_name                 = "${module.hub_network.vnet_name}"
-
   firewall_subnet_prefix    = "${var.firewall_subnet_prefix}"
   firewall_public_ip_name   = "${var.firewall_name}-pip"
+
+  tags                      = "${var.tags}"
+}
+
+module "gateway" {
+  source                    = "./modules/gateway"
+
+  gateway_name              = "${var.gateway_name}"
+
+  resource_group_name       = "${var.gateway_resource_group_name}"
+  location                  = "${var.location}"
+
+  vnet_name                 = "${var.gateway_vnet_name}"
+  address_space             = "${var.gateway_address_space}"
+  gateway_subnet_prefix    = "${var.gateway_subnet_prefix}"
+  gateway_public_ip_name   = "${var.gateway_name}-pip"
 
   tags                      = "${var.tags}"
 }
