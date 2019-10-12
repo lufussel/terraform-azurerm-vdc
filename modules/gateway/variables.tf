@@ -9,7 +9,7 @@ variable "gateway_sku" {
 }
 
 variable "vnet_name" {
-  description = "The name of the virtual network for the virtual network gateway. Changing this forces a new resource to be created."
+  description = "The name of the virtual network in which to create the virtual network gateway. Changing this forces a new resource to be created."
   default     = "hub-gateway-network"
 }
 
