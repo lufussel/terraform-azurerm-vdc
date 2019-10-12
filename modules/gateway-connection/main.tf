@@ -4,6 +4,7 @@ resource "azurerm_local_network_gateway" "gateway_connection" {
   resource_group_name = "${var.resource_group_name}"
   gateway_address     = "${var.local_gateway_public_ip}"
   address_space       = "${var.local_gateway_address_space}"
+  tags                = "${var.tags}"
 }
 
 resource "azurerm_virtual_network_gateway_connection" "gateway_connection" {
@@ -16,4 +17,6 @@ resource "azurerm_virtual_network_gateway_connection" "gateway_connection" {
   local_network_gateway_id   = "${azurerm_local_network_gateway.gateway_connection.id}"
 
   shared_key = "${var.shared_key}"
+
+  tags                = "${var.tags}"
 }
