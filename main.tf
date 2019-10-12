@@ -46,8 +46,26 @@ module "gateway" {
 
   vnet_name                 = "${var.gateway_vnet_name}"
   address_space             = "${var.gateway_address_space}"
-  gateway_subnet_prefix    = "${var.gateway_subnet_prefix}"
-  gateway_public_ip_name   = "${var.gateway_name}-pip"
+  gateway_subnet_prefix     = "${var.gateway_subnet_prefix}"
+  gateway_public_ip_name    = "${var.gateway_name}-pip"
 
   tags                      = "${var.tags}"
+}
+
+module "gateway_connection" {
+  source                        = "./modules/gateway-connection"
+
+  gateway_connection_name       = "${var.local_gateway_name}-connection"
+  shared_key                    = "${var.gateway_connection_shared_key}"
+
+  local_gateway_name            = "${var.local_gateway_name}"
+  local_gateway_public_ip       = "${var.local_gateway_public_ip}"
+  local_gateway_address_space   = "${var.local_gateway_address_space}"
+
+  resource_group_name           = "${module.gateway.resource_group_name}"
+  location                      = "${var.location}"
+
+  gateway_id                    = "${module.gateway.gateway_id}"
+
+  tags                          = "${var.tags}"
 }

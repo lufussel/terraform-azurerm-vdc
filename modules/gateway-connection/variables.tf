@@ -3,6 +3,11 @@ variable "gateway_connection_name" {
   default     = "on-premises-gateway-connection"
 }
 
+variable "shared_key" {
+  description = "The shared key used for the gateway connection. Do not store this key in source control."
+  default     = "!use-AverySecretsecuredKey"
+}
+
 variable "local_gateway_name" {
   description = "The name of the local gateway. Changing this forces a new resource to be created."
   default     = "on-premises-gateway"
@@ -10,7 +15,7 @@ variable "local_gateway_name" {
 
 variable "local_gateway_public_ip" {
   description = "The IP address of the local gateway."
-  default     = "on-premises-gateway"
+  default     = "123.123.123.123"
 }
 
 variable "local_gateway_address_space" {
@@ -31,10 +36,5 @@ variable "resource_group_name" {
 variable "gateway_id" {
   description = "The id of the virtual network gateway. Changing this forces a new resource to be created."
   default     = "on-premises-gateway-connection"
-}
-
-variable "shared_key" {
-  description = "The shared key used for the gateway connection. Do not store this key in source control."
-  default     = "!use-AverySecretsecuredKey"
 }
 
