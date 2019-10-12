@@ -1,11 +1,11 @@
 variable "hub_vnet_name" {
   description = "The name of the virtual network. Changing this forces a new resource to be created."
-  default     = "hub-vnet"
+  default     = "hub-network"
 }
 
 variable "hub_resource_group_name" {
   description = "The name of the resource group in which to create the virtual network."
-  default     = "hub-vnet-rg"
+  default     = "hub-network-rg"
 }
 
 variable "location" {
@@ -40,32 +40,32 @@ variable "firewall_subnet_prefix" {
 
 variable "firewall_name" {
   description = "The name of the firewall. Changing this forces a new resource to be created."
-  default     = "hub-fw"
+  default     = "hub-firewall"
 }
 
 variable "gateway_name" {
   description = "The name of the virtual network gateway. Changing this forces a new resource to be created."
-  default     = "hub-fw"
+  default     = "hub-gateway"
 }
 
 variable "gateway_resource_group_name" {
   description = "The name of the resource group in which to create the virtual network gateway."
-  default     = "hub-fw-rg"
+  default     = "hub-gateway-rg"
 }
 
 variable "gateway_vnet_name" {
   description = "The name of the virtual network in which to create the virtual network gateway. Changing this forces a new resource to be created."
-  default     = "hub-vnet"
+  default     = "hub-gateway-network"
 }
 
 variable "gateway_address_space" {
   description = "The address space that is used for the virtual network gateway. You can supply more than one address space."
-  default     = ["10.0.0.0/16"]
+  default     = ["10.250.0.0/22"]
 }
 
 variable "gateway_subnet_prefix" {
   description = "The address prefix to associate to the gateway subnet."
-  default     = "10.0.0.0/24"
+  default     = "10.250.0.0/24"
 }
 
 variable "tags" {
