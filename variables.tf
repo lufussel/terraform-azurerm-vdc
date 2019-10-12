@@ -15,7 +15,7 @@ variable "location" {
 
 variable "hub_address_space" {
   description = "The address space that is used for the virtual network. You can supply more than one address space."
-  default     = ["10.0.0.0/16"]
+  default     = ["10.10.0.0/16"]
 }
 
 variable "hub_dns_servers" {
@@ -30,12 +30,12 @@ variable "hub_subnet_names" {
 
 variable "hub_subnet_prefixes" {
   description = "A list of address prefixes to associate to the subnets."
-  default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  default     = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
 }
 
 variable "firewall_subnet_prefix" {
   description = "The address prefix to associate to the firewall subnet."
-  default     = "10.0.0.0/24"
+  default     = "10.10.0.0/24"
 }
 
 variable "firewall_name" {
@@ -80,7 +80,7 @@ variable "local_gateway_public_ip" {
 
 variable "local_gateway_address_space" {
   description = "The address space of the local gateway."
-  default     = ["10.100.0.0/16"]
+  default     = ["10.0.0.0/16"]
 }
 
 variable "gateway_connection_shared_key" {
