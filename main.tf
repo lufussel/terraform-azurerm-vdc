@@ -69,3 +69,14 @@ module "gateway_connection" {
 
   tags                          = "${var.tags}"
 }
+
+module "peering" {
+  source                        = "./modules/peering"
+
+  hub_vnet_name                 = "${module.hub_network.vnet_name}"
+  hub_vnet_id                   = "${module.hub_network.vnet_id}"
+  hub_resource_group_name       = "${module.hub_network.resource_group_name}"
+  gateway_vnet_name             = "${module.gateway.vnet_name}"
+  gateway_vnet_id               = "${module.gateway.vnet_id}"
+  gateway_resource_group_name   = "${module.gateway.resource_group_name}"
+}
