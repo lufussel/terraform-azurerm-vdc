@@ -85,7 +85,7 @@ variable "local_gateway_address_space" {
 
 variable "gateway_connection_shared_key" {
   description = "The shared key used for the gateway connection. Do not store this key in source control."
-  default     = "!use-AverySecretsecuredKey"
+  default     = ""
 }
 
 variable "tags" {
