@@ -45,11 +45,11 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
         TF_ACTION_WORKSPACE: "default"
-      uses: lufussel/terraform-github-actions/plandestroy@v0.4.5
+      uses: lufussel/terraform-github-actions/plandestroy@v0.4.6
     - name: Run terraform destroy (cleaning up environment)
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
         TF_ACTION_WORKSPACE: "default"
-      uses: lufussel/terraform-github-actions/destroy@v0.4.5
+      uses: lufussel/terraform-github-actions/destroy@v0.4.6
 
