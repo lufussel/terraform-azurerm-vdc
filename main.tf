@@ -80,3 +80,20 @@ module "peering" {
   gateway_vnet_id               = "${module.gateway.vnet_id}"
   gateway_resource_group_name   = "${module.gateway.resource_group_name}"
 }
+
+module "network-security-group" {
+  source                        = "Azure/network-security-group/azurerm"
+
+  resource_group_name           = "nsg-nsgs-group"
+  location                      = "westeurope"
+  security_group_name           = "nsg"
+  predefined_rules              = [
+    {
+      name                      = "ActiveDirectory"
+      priority                  = "1000"
+        source_address_prefix   = ["10.100.0.0/16"]
+    }
+  ]
+  custom_rules                  = []
+  tags                          = "${var.tags}"
+}
