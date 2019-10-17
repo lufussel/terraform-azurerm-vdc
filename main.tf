@@ -80,16 +80,3 @@ module "peering" {
   gateway_vnet_id               = "${module.gateway.vnet_id}"
   gateway_resource_group_name   = "${module.gateway.resource_group_name}"
 }
-
-module "network-security-group" {
-  source                        = "./modules/network-security-group/modules/ActiveDirectory"
-
-  resource_group_name           = "hub-nsgs-rg"
-  security_group_name           = "hub-activedirectory-nsg"
-  location                      = "westeurope"
-  tags                          = "${var.tags}"
-  
-  custom_rules                  = []
-
-  source_address_prefix   = ["10.100.0.0/16"]
-}
