@@ -82,7 +82,7 @@ module "peering" {
 }
 
 module "network-security-group" {
-  source                        = "github.com/lufussel/terraform-azurerm-vdc/modules/hub-network"
+  source                        = "github.com/lufussel/terraform-azurerm-vdc/modules/hub-network?ref=v1.1.1"
 
   resource_group_name           = "hub-nsgs-rg"
   location                      = "westeurope"
