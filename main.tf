@@ -82,18 +82,14 @@ module "peering" {
 }
 
 module "network-security-group" {
-  source                        = "github.com/Azure/terraform-azurerm-network-security-group?ref=v1.1.1"
+  source                        = "./modules/network-security-group/modules/ActiveDirectory"
 
   resource_group_name           = "hub-nsgs-rg"
+  security_group_name           = "hub-activedirectory-nsg"
   location                      = "westeurope"
-  security_group_name           = "nsg"
-  predefined_rules              = [
-    {
-      name                      = "ActiveDirectory"
-      priority                  = "1000"
-        source_address_prefix   = ["10.100.0.0/16"]
-    }
-  ]
-  custom_rules                  = []
   tags                          = "${var.tags}"
+  
+  custom_rules                  = []
+
+  source_address_prefix   = ["10.100.0.0/16"]
 }
