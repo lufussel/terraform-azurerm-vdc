@@ -82,9 +82,9 @@ module "peering" {
 }
 
 module "network-security-group" {
-  source                        = "Azure/network-security-group/azurerm"
+  source                        = "github.com/lufussel/terraform-azurerm-vdc/modules/hub-network"
 
-  resource_group_name           = "nsg-nsgs-group"
+  resource_group_name           = "hub-nsgs-rg"
   location                      = "westeurope"
   security_group_name           = "nsg"
   predefined_rules              = [
