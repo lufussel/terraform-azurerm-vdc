@@ -7,6 +7,8 @@ env:
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION }}
   ARM_TENANT_ID: ${{ secrets.AZURE_SERVICE_TENANT }}
+  TF_VAR_gateway_connection_shared_key: ${{ secrets.TF_VAR_gateway_connection_shared_key }}
+  TF_VAR_local_gateway_public_ip: ${{ secrets.TF_VAR_local_gateway_public_ip }}
 
 jobs:
   terraform-integration:
@@ -43,11 +45,11 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
         TF_ACTION_WORKSPACE: "default"
-      uses: lufussel/terraform-github-actions/plandestroy@v0.4.9
+      uses: lufussel/terraform-github-actions/plandestroy@v0.4.6
     - name: Run terraform destroy (cleaning up environment)
       env: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: "."
         TF_ACTION_WORKSPACE: "default"
-      uses: lufussel/terraform-github-actions/destroy@v0.4.9
+      uses: lufussel/terraform-github-actions/destroy@v0.4.6
 
