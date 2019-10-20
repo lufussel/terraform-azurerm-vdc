@@ -44,8 +44,8 @@ module "bastion" {
   location                  = "${var.location}"
 
   vnet_name                 = "${module.hub_network.vnet_name}"
-  bastion_subnet_prefix     = "${var.bastion_name_prefix}"
-  bastion_public_ip_name   = "${var.bastion_name}-pip"
+  bastion_subnet_prefix     = "${var.bastion_subnet_prefix}"
+  bastion_public_ip_name    = "${var.bastion_name}-pip"
 
   tags                      = "${var.tags}"
 }
