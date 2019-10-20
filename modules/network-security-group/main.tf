@@ -13,6 +13,7 @@ resource "azurerm_network_security_group" "nsg" {
 
   security_rule {
     name                       = "HTTPS"
+    description                = "Allow HTTPS access inbound"
     priority                   = 1000
     direction                  = "Inbound"
     access                     = "Allow"
@@ -32,6 +33,7 @@ resource "azurerm_network_security_rule" "nsg" {
   name                        = "HTTP"
   priority                    = 1010
   direction                   = "Inbound"
+  description                 = "Allow HTTP access inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
