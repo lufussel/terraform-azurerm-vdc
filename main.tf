@@ -98,20 +98,20 @@ module "network-security-group" {
 
 # TEMP: Example using terraform-azurerm-network-security-group module published on GitHub 
 
-# module "github-network-security-group" {
-#   source                        = "github.com/Azure/terraform-azurerm-network-security-group"
+module "github-network-security-group" {
+  source                        = "github.com/Azure/terraform-azurerm-network-security-group"
 
-#   security_group_name           = "${var.nsg_prefix}-example2-nsg"
+  security_group_name           = "${var.nsg_prefix}-example2-nsg"
 
-#   resource_group_name           = "${var.nsg_resource_group_name}"
-#   location                      = "${var.location}"
+  resource_group_name           = "${var.nsg_resource_group_name}"
+  location                      = "${var.location}"
 
-#   source_address_prefix         = ["10.0.0.0/16"]
-#   predefined_rules              = [
-#     {
-#       name = "HTTPS"
-#     }
-#   ]
+  source_address_prefix         = ["10.0.0.0/16"]
+  predefined_rules              = [
+    {
+      name = "HTTPS"
+    }
+  ]
 
-#   tags                          = "${var.tags}"
-# }
+  tags                          = "${var.tags}"
+}
