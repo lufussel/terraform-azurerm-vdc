@@ -13,12 +13,12 @@ variable "vnet_name" {
   default     = "hub-vnet"
 }
 
-variable "firewall_subnet_prefix" {
+variable "bastion_subnet_prefix" {
   description = "The address prefixes to associate to bastion subnet."
   default     = "10.0.1.0/24"
 }
 
-variable "firewall_public_ip_name" {
+variable "bastion_public_ip_name" {
   description = "The name of the bastion public IP address. Changing this forces a new resource to be created."
   default     = "hub-bastion-pip"
 }
