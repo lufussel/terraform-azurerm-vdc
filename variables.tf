@@ -30,7 +30,7 @@ variable "hub_subnet_names" {
 
 variable "hub_subnet_prefixes" {
   description = "A list of address prefixes to associate to the subnets."
-  default     = ["10.100.1.0/24", "10.100.2.0/24", "10.100.3.0/24"]
+  default     = ["10.100.2.0/24", "10.100.3.0/24", "10.100.4.0/24"]
 }
 
 variable "firewall_subnet_prefix" {
@@ -38,9 +38,19 @@ variable "firewall_subnet_prefix" {
   default     = "10.100.0.0/24"
 }
 
+variable "bastion_subnet_prefix" {
+  description = "The address prefix to associate to the bastion subnet."
+  default     = "10.100.1.0/24"
+}
+
 variable "firewall_name" {
   description = "The name of the firewall. Changing this forces a new resource to be created."
   default     = "hub-firewall"
+}
+
+variable "bastion_name" {
+  description = "The name of the bastion. Changing this forces a new resource to be created."
+  default     = "hub-bastion"
 }
 
 variable "gateway_name" {
