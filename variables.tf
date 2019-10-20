@@ -98,6 +98,16 @@ variable "nsg_resource_group_name" {
   default     = "hub-nsg-rg"
 }
 
+variable "route_table_resource_group_name" {
+  description = "The name of the resource group in which to create route tables."
+  default     = "hub-route-table-rg"
+}
+
+variable "route_table_default_gateway_ip_address" {
+  description = "The IP address used for the default gateway, such as a network virtual appliance or firewall."
+  default     = "10.100.0.4"
+}
+
 variable "tags" {
   description = "A mapping of tags to assign to the resource."
   type        = "map"

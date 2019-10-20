@@ -115,3 +115,16 @@ module "github-network-security-group" {
 
   tags                          = "${var.tags}"
 }
+
+module "route-table" {
+  source                        = "./modules/route-table"
+
+  route_table_name              = "${var.hub_vnet_name}-default-route-table"
+
+  resource_group_name           = "${var.route_table_resource_group_name}"
+  location                      = "${var.location}"
+
+  default_gateway_ip_address    = "${var.route_table_default_gateway_ip_address}"
+
+  tags                          = "${var.tags}"
+}
