@@ -17,6 +17,7 @@ module "hub_network" {
   dns_servers               = "${var.hub_dns_servers}"
   subnet_names              = "${var.hub_subnet_names}"
   subnet_prefixes           = "${var.hub_subnet_prefixes}"
+  route_table_id            = "${module.route-table.route_table_id}"
 
   tags                      = "${var.tags}"
 }
@@ -32,6 +33,19 @@ module "firewall" {
   vnet_name                 = "${module.hub_network.vnet_name}"
   firewall_subnet_prefix    = "${var.firewall_subnet_prefix}"
   firewall_public_ip_name   = "${var.firewall_name}-pip"
+
+  tags                      = "${var.tags}"
+}
+
+module "bastion" {
+  source                    = "./modules/bastion"
+
+  resource_group_name       = "${module.hub_network.resource_group_name}"
+  location                  = "${var.location}"
+
+  vnet_name                 = "${module.hub_network.vnet_name}"
+  bastion_subnet_prefix     = "${var.bastion_name_prefix}"
+  firewall_public_ip_name   = "${var.bastion_name}-pip"
 
   tags                      = "${var.tags}"
 }
