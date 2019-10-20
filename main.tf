@@ -130,6 +130,82 @@ module "github-network-security-group" {
   tags                          = "${var.tags}"
 }
 
+module "nsg-external-customrules-module" {
+  source                        = "Azure/network-security-group/azurerm"
+
+  security_group_name           = "cs-allow-custom-nsg"
+
+  resource_group_name           = "cs-hub-nsg-rg"
+  location                      = "${var.location}"
+
+  custom_rules                  = [
+    {
+      name                        = "allow-ad-rpc"
+      priority                    = "1000"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "*"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "135"
+      destination_address_prefix  = "*"
+      description                 = "Allow RPC for Active Directory"
+    }
+  ]
+
+  tags                          = "${var.tags}"
+}
+
+module "network-security-group-rules" {
+  source                          = "./modules/network-security-group-rules"
+
+  nsg_name                        = "${var.nsg_prefix}-customrules-nsg"
+
+  resource_group_name             = "cs-hub-nsg-rg"
+  location                        = "${var.location}"
+
+  rules                           = [
+    {
+      name                        = "allow-https"
+      priority                    = "1000"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "Tcp"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "443"
+      destination_address_prefix  = "*"
+      description                 = "Allow HTTPS inbound"
+    },
+    {
+      name                        = "allow-http"
+      priority                    = "1010"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "Tcp"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "80"
+      destination_address_prefix  = "*"
+      description                 = "Allow HTTP inbound"
+    },
+    {
+      name                        = "allow-rdp"
+      priority                    = "1020"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "*"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "3389"
+      destination_address_prefix  = "*"
+      description                 = "Allow RDP inbound"
+    }
+  ]
+
+  tags                            = "${var.tags}"
+}
+
 module "route-table" {
   source                        = "./modules/route-table"
 
