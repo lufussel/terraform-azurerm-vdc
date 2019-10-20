@@ -80,3 +80,38 @@ module "peering" {
   gateway_vnet_id               = "${module.gateway.vnet_id}"
   gateway_resource_group_name   = "${module.gateway.resource_group_name}"
 }
+
+# TEMP: Example using built in module
+
+module "network-security-group" {
+  source                        = "./modules/network-security-group"
+
+  nsg_name                      = "${var.nsg_prefix}-example1-nsg"
+
+  resource_group_name           = "${var.nsg_resource_group_name}"
+  location                      = "${var.location}"
+
+  source_address_prefix         = ["10.0.0.0/16"]
+
+  tags                          = "${var.tags}"
+}
+
+# TEMP: Example using terraform-azurerm-network-security-group module published on GitHub 
+
+module "github-network-security-group" {
+  source                        = "github.com/Azure/terraform-azurerm-network-security-group"
+
+  security_group_name           = "${var.nsg_prefix}-example2-nsg"
+
+  resource_group_name           = "${var.nsg_resource_group_name}"
+  location                      = "${var.location}"
+
+  source_address_prefix         = ["10.0.0.0/16"]
+  predefined_rules              = [
+    {
+      name = "HTTPS"
+    }
+  ]
+
+  tags                          = "${var.tags}"
+}

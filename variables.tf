@@ -88,6 +88,16 @@ variable "gateway_connection_shared_key" {
   default     = ""
 }
 
+variable "nsg_prefix" {
+  description = "The prefix of the network security group names. Changing this forces a new resource to be created."
+  default     = "hub"
+}
+
+variable "nsg_resource_group_name" {
+  description = "The name of the resource group in which to create the network security groups."
+  default     = "hub-nsg-rg"
+}
+
 variable "tags" {
   description = "A mapping of tags to assign to the resource."
   type        = "map"
