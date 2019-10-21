@@ -17,7 +17,7 @@ module "hub_network" {
   dns_servers               = "${var.hub_dns_servers}"
   subnet_names              = "${var.hub_subnet_names}"
   subnet_prefixes           = "${var.hub_subnet_prefixes}"
-  route_table_id            = "${module.route-table.route_table_id}"
+  route_table_id            = "${module.default_route_table.route_table_id}"
 
   tags                      = "${var.tags}"
 }
@@ -97,7 +97,7 @@ module "peering" {
 
 # TEMP: Example using built in module
 
-module "network-security-group" {
+module "network_security_group" {
   source                        = "./modules/network-security-group"
 
   nsg_name                      = "${var.nsg_prefix}-example1-nsg"
@@ -112,7 +112,7 @@ module "network-security-group" {
 
 # TEMP: Example using terraform-azurerm-network-security-group module published on GitHub 
 
-module "github-network-security-group" {
+module "github_network_security_group" {
   source                        = "github.com/Azure/terraform-azurerm-network-security-group"
 
   security_group_name           = "${var.nsg_prefix}-example2-nsg"
@@ -130,7 +130,7 @@ module "github-network-security-group" {
   tags                          = "${var.tags}"
 }
 
-module "nsg-external-customrules-module" {
+module "nsg_external_customrules_module" {
   source                        = "Azure/network-security-group/azurerm"
 
   security_group_name           = "cs-allow-custom-nsg"
@@ -156,57 +156,9 @@ module "nsg-external-customrules-module" {
   tags                          = "${var.tags}"
 }
 
-module "network-security-group-rules" {
-  source                          = "./modules/network-security-group-rules"
+# Default route table
 
-  nsg_name                        = "${var.nsg_prefix}-customrules-nsg"
-
-  resource_group_name             = "cs-hub-nsg-rg"
-  location                        = "${var.location}"
-
-  rules                           = [
-    {
-      name                        = "allow-https"
-      priority                    = "1000"
-      direction                   = "Inbound"
-      access                      = "Allow"
-      protocol                    = "Tcp"
-      source_port_ranges          = "*"
-      source_address_prefix       = "*"
-      destination_port_ranges     = "443"
-      destination_address_prefix  = "*"
-      description                 = "Allow HTTPS inbound"
-    },
-    {
-      name                        = "allow-http"
-      priority                    = "1010"
-      direction                   = "Inbound"
-      access                      = "Allow"
-      protocol                    = "Tcp"
-      source_port_ranges          = "*"
-      source_address_prefix       = "*"
-      destination_port_ranges     = "80"
-      destination_address_prefix  = "*"
-      description                 = "Allow HTTP inbound"
-    },
-    {
-      name                        = "allow-rdp"
-      priority                    = "1020"
-      direction                   = "Inbound"
-      access                      = "Allow"
-      protocol                    = "*"
-      source_port_ranges          = "*"
-      source_address_prefix       = "*"
-      destination_port_ranges     = "3389"
-      destination_address_prefix  = "*"
-      description                 = "Allow RDP inbound"
-    }
-  ]
-
-  tags                            = "${var.tags}"
-}
-
-module "route-table" {
+module "default_route_table" {
   source                        = "./modules/route-table"
 
   route_table_name              = "${var.hub_vnet_name}-default-route-table"
@@ -217,4 +169,35 @@ module "route-table" {
   default_gateway_ip_address    = "${var.route_table_default_gateway_ip_address}"
 
   tags                          = "${var.tags}"
+}
+
+
+# Example with subnet specific modules using network-subnet module
+
+module "domain_subnet" {
+  source                    = "./modules/network-subnet"
+
+  vnet_name                 = "${module.hub_network.vnet_name}"
+
+  resource_group_name       = "${module.hub_network.resource_group_name}"
+
+  subnet_name               = "${var.domain_subnet_name}"
+  subnet_prefix             = "${var.domain_subnet_prefix}"
+  route_table_id            = "${module.default_route_table.route_table_id}"
+  nsg_id                    = "${module.domain_subnet_network_security_group.nsg_id}"
+}
+
+# Subnet specific NSG
+
+module "domain_subnet_network_security_group" {
+  source                          = "./modules/network-security-group-rules"
+
+  nsg_name                        = "${var.domain_nsg_name}"
+
+  resource_group_name             = "${var.nsg_resource_group_name}"
+  location                        = "${var.location}"
+
+  rules                           = "${var.domain_nsg_rules}"
+
+  tags                            = "${var.tags}"
 }
