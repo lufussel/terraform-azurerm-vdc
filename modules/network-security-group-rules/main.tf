@@ -1,13 +1,7 @@
-resource "azurerm_resource_group" "nsg" {
-  name                = "${var.resource_group_name}"
-  location            = "${var.location}"
-  tags                = "${var.tags}"
-}
-
 resource "azurerm_network_security_group" "nsg" {
   name                = "${var.nsg_name}"
-  location            = "${azurerm_resource_group.nsg.location}"
-  resource_group_name = "${azurerm_resource_group.nsg.name}"
+  location            = "${var.location}"
+  resource_group_name = "${var.resource_group_name}"
 
   tags = "${var.tags}"
 }
@@ -29,7 +23,7 @@ resource "azurerm_network_security_rule" "nsg" {
 
   description                   = "${lookup(var.rules[count.index], "description", "default")}"
 
-  resource_group_name           = "${azurerm_resource_group.nsg.name}"
+  resource_group_name           = "${var.resource_group_name}"
   network_security_group_name   = "${azurerm_network_security_group.nsg.name}"
 
   count                         = "${length(var.rules)}"

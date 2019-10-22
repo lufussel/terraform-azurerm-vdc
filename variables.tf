@@ -165,11 +165,6 @@ variable "domain_nsg_rules" {
   ]
 }
 
-variable "nsg_resource_group_name" {
-  description = "The name of the resource group in which to create the network security groups."
-  default     = "hub-nsg-rg"
-}
-
 variable "route_table_resource_group_name" {
   description = "The name of the resource group in which to create route tables."
   default     = "hub-route-table-rg"
