@@ -20,9 +20,3 @@ resource "azurerm_subnet" "subnet" {
   address_prefix            = "${var.subnet_prefixes[count.index]}"
   count                     = "${length(var.subnet_names)}"
 }
-
-resource "azurerm_subnet_route_table_association" "route_table" {
-  subnet_id      = "${azurerm_subnet.subnet[count.index].id}"
-  route_table_id = "${var.route_table_id}"
-  count          = "${length(var.subnet_names)}"
-}
