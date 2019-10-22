@@ -95,67 +95,6 @@ module "peering" {
   gateway_resource_group_name   = "${module.gateway.resource_group_name}"
 }
 
-# TEMP: Example using built in module
-
-module "network_security_group" {
-  source                        = "./modules/network-security-group"
-
-  nsg_name                      = "${var.nsg_prefix}-example1-nsg"
-
-  resource_group_name           = "${var.nsg_resource_group_name}"
-  location                      = "${var.location}"
-
-  source_address_prefix         = ["10.0.0.0/16"]
-
-  tags                          = "${var.tags}"
-}
-
-# TEMP: Example using terraform-azurerm-network-security-group module published on GitHub 
-
-module "github_network_security_group" {
-  source                        = "github.com/Azure/terraform-azurerm-network-security-group"
-
-  security_group_name           = "${var.nsg_prefix}-example2-nsg"
-
-  resource_group_name           = "${var.nsg_resource_group_name}"
-  location                      = "${var.location}"
-
-  source_address_prefix         = ["10.0.0.0/16"]
-  predefined_rules              = [
-    {
-      name = "HTTPS"
-    }
-  ]
-
-  tags                          = "${var.tags}"
-}
-
-module "nsg_external_customrules_module" {
-  source                        = "Azure/network-security-group/azurerm"
-
-  security_group_name           = "cs-allow-custom-nsg"
-
-  resource_group_name           = "cs-hub-nsg-rg"
-  location                      = "${var.location}"
-
-  custom_rules                  = [
-    {
-      name                        = "allow-ad-rpc"
-      priority                    = "1000"
-      direction                   = "Inbound"
-      access                      = "Allow"
-      protocol                    = "*"
-      source_port_ranges          = "*"
-      source_address_prefix       = "*"
-      destination_port_ranges     = "135"
-      destination_address_prefix  = "*"
-      description                 = "Allow RPC for Active Directory"
-    }
-  ]
-
-  tags                          = "${var.tags}"
-}
-
 # Default route table
 
 module "default_route_table" {
@@ -170,7 +109,6 @@ module "default_route_table" {
 
   tags                          = "${var.tags}"
 }
-
 
 # Example with subnet specific modules using network-subnet module
 
