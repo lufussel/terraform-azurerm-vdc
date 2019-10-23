@@ -164,7 +164,7 @@ variable "domain_nsg_name" {
 }
 
 variable "domain_nsg_rules" {
-  description = ""
+  description = "Rules to apply to the network security group."
   default     = [
     {
       name                        = "allow-rpc"
@@ -338,7 +338,7 @@ variable "management_nsg_name" {
 }
 
 variable "management_nsg_rules" {
-  description = ""
+  description = "Rules to apply to the network security group."
   default     = [
     {
       name                        = "allow-rdp"
