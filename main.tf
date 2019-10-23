@@ -40,7 +40,7 @@ module "bastion" {
   resource_group_name       = "${module.hub_network.resource_group_name}"
   location                  = "${var.location}"
 
-  vnet_name                 = "${var.env}-${module.hub_network.vnet_name}"
+  vnet_name                 = "${module.hub_network.vnet_name}"
   bastion_subnet_prefix     = "${var.bastion_subnet_prefix}"
   bastion_public_ip_name    = "${var.bastion_name}-pip"
 
