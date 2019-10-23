@@ -18,12 +18,12 @@ variable "resource_group_name" {
   default     = "hub-network-rg"
 }
 
-variable "route_table_id" {
-  description = "The id of the route table to attach to the subnet."
-  default     = []
-}
+# variable "route_table_id" {
+#   description = "The id of the route table to attach to the subnet."
+#   default     = []
+# }
 
-variable "nsg_id" {
-  description = "The id of the network security group to attach to the subnet."
-  default     = []
-}
+# variable "nsg_id" {
+#   description = "The id of the network security group to attach to the subnet."
+#   default     = []
+# }

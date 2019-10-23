@@ -120,8 +120,8 @@ module "domain_subnet" {
 
   subnet_name               = "${var.domain_subnet_name}"
   subnet_prefix             = "${var.domain_subnet_prefix}"
-  route_table_id            = "${module.default_route_table.route_table_id}"
-  nsg_id                    = "${module.domain_subnet_network_security_group.nsg_id}"
+#   route_table_id            = "${module.default_route_table.route_table_id}"
+#   nsg_id                    = "${module.domain_subnet_network_security_group.nsg_id}"
 }
 
 module "domain_subnet_network_security_group" {
