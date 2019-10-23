@@ -167,40 +167,202 @@ variable "domain_nsg_rules" {
   description = ""
   default     = [
     {
-      name                        = "allow-https"
+      name                        = "allow-rpc"
       priority                    = "1000"
       direction                   = "Inbound"
       access                      = "Allow"
       protocol                    = "Tcp"
       source_port_ranges          = "*"
       source_address_prefix       = "*"
-      destination_port_ranges     = "443"
+      destination_port_ranges     = "135"
       destination_address_prefix  = "*"
-      description                 = "Allow HTTPS inbound"
+      description                 = "Allow RPC Endpoint Mapper inbound"
     },
     {
-      name                        = "allow-http"
+      name                        = "allow-ldap"
       priority                    = "1010"
-      direction                   = "Inbound"
-      access                      = "Allow"
-      protocol                    = "Tcp"
-      source_port_ranges          = "*"
-      source_address_prefix       = "*"
-      destination_port_ranges     = "80"
-      destination_address_prefix  = "*"
-      description                 = "Allow HTTP inbound"
-    },
-    {
-      name                        = "allow-rdp"
-      priority                    = "1020"
       direction                   = "Inbound"
       access                      = "Allow"
       protocol                    = "*"
       source_port_ranges          = "*"
       source_address_prefix       = "*"
+      destination_port_ranges     = "389"
+      destination_address_prefix  = "*"
+      description                 = "Allow LDAP inbound"
+    },
+    {
+      name                        = "allow-ldap-ssl"
+      priority                    = "1020"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "Tcp"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "636"
+      destination_address_prefix  = "*"
+      description                 = "Allow LDAP SSL inbound"
+    },
+    {
+      name                        = "allow-ldap-gc"
+      priority                    = "1030"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "Tcp"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "3268"
+      destination_address_prefix  = "*"
+      description                 = "Allow LDAP GC inbound"
+    },
+    {
+      name                        = "allow-ldap-gc-ssl"
+      priority                    = "1040"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "Tcp"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "3269"
+      destination_address_prefix  = "*"
+      description                 = "Allow LDAP GC SSL inbound"
+    },
+    {
+      name                        = "allow-dns"
+      priority                    = "1050"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "*"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "53"
+      destination_address_prefix  = "*"
+      description                 = "Allow DNS inbound"
+    },
+    {
+      name                        = "allow-kerberos"
+      priority                    = "1060"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "*"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "88"
+      destination_address_prefix  = "*"
+      description                 = "Allow Kerberos inbound"
+    },
+    {
+      name                        = "allow-smb"
+      priority                    = "1070"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "Tcp"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "445"
+      destination_address_prefix  = "*"
+      description                 = "Allow SMB inbound"
+    },
+    {
+      name                        = "allow-windowstime"
+      priority                    = "1100"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "Udp"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "123"
+      destination_address_prefix  = "*"
+      description                 = "Allow W32Time inbound"
+    },
+    {
+      name                        = "allow-kerberos-pc"
+      priority                    = "1110"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "*"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "464"
+      destination_address_prefix  = "*"
+      description                 = "Allow Kerberos password change inbound"
+    },
+    {
+      name                        = "allow-rdp"
+      priority                    = "2000"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "*"
+      source_port_ranges          = "*"
+      source_address_prefix       = "10.100.8.0/24"
       destination_port_ranges     = "3389"
       destination_address_prefix  = "*"
-      description                 = "Allow RDP inbound"
+      description                 = "Allow RDP inbound from Management"
+    },
+    {
+      name                        = "allow-powershellremoting"
+      priority                    = "2010"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "*"
+      source_port_ranges          = "*"
+      source_address_prefix       = "10.100.8.0/24"
+      destination_port_ranges     = "5985-5986"
+      destination_address_prefix  = "*"
+      description                 = "Allow WinRM and PowerShell Remoting inbound from Management"
+    }
+  ]
+}
+
+# --------------------------------------------------------
+# Properties of management subnet
+# --------------------------------------------------------
+
+variable "management_subnet_name" {
+  description = "The name of the management subnet. Changing this forces a new resource to be created."
+  default     = "management"
+}
+
+variable "management_subnet_prefix" {
+  description = "The address prefix to associate to the management subnet."
+  default     = "10.100.6.0/24"
+}
+
+variable "management_route_table_name" {
+  description = "The name of the management subnet. Changing this forces a new resource to be created."
+  default     = "hub-network-management-route-table"
+}
+
+variable "management_nsg_name" {
+  description = "The name of the network security group. Changing this forces a new resource to be created."
+  default     = "hub-network-management-nsg"
+}
+
+variable "management_nsg_rules" {
+  description = ""
+  default     = [
+    {
+      name                        = "allow-rdp"
+      priority                    = "1000"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "Tcp"
+      source_port_ranges          = "*"
+      source_address_prefix       = "10.100.1.0/24"
+      destination_port_ranges     = "3389"
+      destination_address_prefix  = "*"
+      description                 = "Allow RDP inbound from Bastion"
+    },
+    {
+      name                        = "allow-ssh"
+      priority                    = "1010"
+      direction                   = "Inbound"
+      access                      = "Allow"
+      protocol                    = "Tcp"
+      source_port_ranges          = "*"
+      source_address_prefix       = "10.100.1.0/24"
+      destination_port_ranges     = "22"
+      destination_address_prefix  = "*"
+      description                 = "Allow RDP inbound from Bastion"
     }
   ]
 }
