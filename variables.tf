@@ -106,15 +106,6 @@ variable "gateway_connection_shared_key" {
 }
 
 # --------------------------------------------------------
-# Properties for all network security groups
-# --------------------------------------------------------
-
-variable "nsg_prefix" {
-  description = "The prefix of the network security group names. Changing this forces a new resource to be created."
-  default     = "hub"
-}
-
-# --------------------------------------------------------
 # Properties of domain subnet
 # --------------------------------------------------------
 
