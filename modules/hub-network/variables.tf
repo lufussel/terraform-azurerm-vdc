@@ -23,21 +23,6 @@ variable "dns_servers" {
   default     = []
 }
 
-variable "subnet_names" {
-  description = "A list of  subnets inside the virtual network."
-  default     = ["subnet1", "subnet2", "subnet3"]
-}
-
-variable "subnet_prefixes" {
-  description = "A list of address prefixes to associate to the subnets."
-  default     = ["10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24"]
-}
-
-variable "route_table_id" {
-  description = "The id of the route table to attach to the subnet."
-  default     = []
-}
-
 variable "tags" {
   description = "A mapping of tags to assign to the resource."
   type        = "map"

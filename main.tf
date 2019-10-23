@@ -15,9 +15,6 @@ module "hub_network" {
 
   address_space             = "${var.hub_address_space}"
   dns_servers               = "${var.hub_dns_servers}"
-  subnet_names              = "${var.hub_subnet_names}"
-  subnet_prefixes           = "${var.hub_subnet_prefixes}"
-  route_table_id            = "${module.default_route_table.route_table_id}"
 
   tags                      = "${var.tags}"
 }

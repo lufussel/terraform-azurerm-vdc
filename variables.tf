@@ -1,6 +1,6 @@
 variable "env" {
   description = "Short code for the environment."
-  default     = "gh-"
+  default     = "gh"
 }
 
 variable "location" {
@@ -30,16 +30,6 @@ variable "hub_address_space" {
 variable "hub_dns_servers" {
   description = "List of IP addresses of DNS servers. If no values specified, this defaults to Azure DNS."
   default     = []
-}
-
-variable "hub_subnet_names" {
-  description = "A list of  subnets inside the virtual network."
-  default     = ["subnet1", "subnet2", "subnet3"]
-}
-
-variable "hub_subnet_prefixes" {
-  description = "A list of address prefixes to associate to the subnets."
-  default     = ["10.100.2.0/24", "10.100.3.0/24", "10.100.4.0/24"]
 }
 
 variable "firewall_subnet_prefix" {
