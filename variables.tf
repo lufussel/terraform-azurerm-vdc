@@ -1,3 +1,7 @@
+# --------------------------------------------------------
+# Global variables
+# --------------------------------------------------------
+
 variable "env" {
   description = "Short code for the environment."
   default     = "gh"
@@ -6,6 +10,17 @@ variable "env" {
 variable "location" {
   description = "The location/region where the virtual network is created. Changing this forces a new resource to be created."
   default     = "westeurope"
+}
+
+variable "tags" {
+  description = "A mapping of tags to assign to the resource."
+  type        = "map"
+
+  default = {
+    application = "vdc-hub"
+    environment = "development"
+    buildagent = "github-actions"
+  }
 }
 
 # --------------------------------------------------------
@@ -188,19 +203,4 @@ variable "route_table_resource_group_name" {
 variable "route_table_default_gateway_ip_address" {
   description = "The IP address used for the default gateway, such as a network virtual appliance or firewall."
   default     = "10.100.0.4"
-}
-
-# --------------------------------------------------------
-# Define tags for the deployment
-# --------------------------------------------------------
-
-variable "tags" {
-  description = "A mapping of tags to assign to the resource."
-  type        = "map"
-
-  default = {
-    application = "vdc-hub"
-    environment = "development"
-    buildagent = "github-actions"
-  }
 }
