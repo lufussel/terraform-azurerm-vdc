@@ -107,7 +107,9 @@ module "default_route_table" {
   tags                          = "${var.tags}"
 }
 
-# Example with subnet specific modules using network-subnet module
+# --------------------------------------------------------
+# Properties of domain subnet
+# --------------------------------------------------------
 
 module "domain_subnet" {
   source                    = "./modules/network-subnet"
@@ -121,8 +123,6 @@ module "domain_subnet" {
   route_table_id            = "${module.default_route_table.route_table_id}"
   nsg_id                    = "${module.domain_subnet_network_security_group.nsg_id}"
 }
-
-# Subnet specific NSG
 
 module "domain_subnet_network_security_group" {
   source                          = "./modules/network-security-group-rules"

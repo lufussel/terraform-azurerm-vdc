@@ -115,7 +115,7 @@ variable "nsg_prefix" {
 }
 
 # --------------------------------------------------------
-# Properties of domain network security group
+# Properties of domain subnet
 # --------------------------------------------------------
 
 variable "domain_subnet_name" {
