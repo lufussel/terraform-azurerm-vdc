@@ -309,6 +309,18 @@ variable "domain_nsg_rules" {
       destination_port_ranges     = "5985-5986"
       destination_address_prefix  = "*"
       description                 = "Allow WinRM and PowerShell Remoting inbound from Management"
+    },
+    {
+      name                        = "deny-all"
+      priority                    = "4000"
+      direction                   = "Inbound"
+      access                      = "Deny"
+      protocol                    = "*"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "*"
+      destination_address_prefix  = "*"
+      description                 = "Deny unmatched inbound traffic"
     }
   ]
 }
@@ -363,6 +375,18 @@ variable "management_nsg_rules" {
       destination_port_ranges     = "22"
       destination_address_prefix  = "*"
       description                 = "Allow RDP inbound from Bastion"
+    },
+    {
+      name                        = "deny-all"
+      priority                    = "4000"
+      direction                   = "Inbound"
+      access                      = "Deny"
+      protocol                    = "*"
+      source_port_ranges          = "*"
+      source_address_prefix       = "*"
+      destination_port_ranges     = "*"
+      destination_address_prefix  = "*"
+      description                 = "Deny unmatched inbound traffic"
     }
   ]
 }
