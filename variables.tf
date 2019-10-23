@@ -1,3 +1,17 @@
+variable "env" {
+  description = "Short code for the environment."
+  default     = "gh"
+}
+
+variable "location" {
+  description = "The location/region where the virtual network is created. Changing this forces a new resource to be created."
+  default     = "westeurope"
+}
+
+# --------------------------------------------------------
+# Properties for the hub network
+# --------------------------------------------------------
+
 variable "hub_vnet_name" {
   description = "The name of the virtual network. Changing this forces a new resource to be created."
   default     = "hub-network"
@@ -6,11 +20,6 @@ variable "hub_vnet_name" {
 variable "hub_resource_group_name" {
   description = "The name of the resource group in which to create the virtual network."
   default     = "hub-network-rg"
-}
-
-variable "location" {
-  description = "The location/region where the virtual network is created. Changing this forces a new resource to be created."
-  default     = "westeurope"
 }
 
 variable "hub_address_space" {
@@ -23,20 +32,14 @@ variable "hub_dns_servers" {
   default     = []
 }
 
-variable "hub_subnet_names" {
-  description = "A list of  subnets inside the virtual network."
-  default     = ["subnet1", "subnet2", "subnet3"]
-}
-
-variable "hub_subnet_prefixes" {
-  description = "A list of address prefixes to associate to the subnets."
-  default     = ["10.100.2.0/24", "10.100.3.0/24", "10.100.4.0/24"]
-}
-
 variable "firewall_subnet_prefix" {
   description = "The address prefix to associate to the firewall subnet."
   default     = "10.100.0.0/24"
 }
+
+# --------------------------------------------------------
+# Azure Bastion properties (in development)
+# --------------------------------------------------------
 
 variable "bastion_subnet_prefix" {
   description = "The address prefix to associate to the bastion subnet."
@@ -52,6 +55,10 @@ variable "bastion_name" {
   description = "The name of the bastion. Changing this forces a new resource to be created."
   default     = "hub-bastion"
 }
+
+# --------------------------------------------------------
+# VPN gateway and gateway network properties
+# --------------------------------------------------------
 
 variable "gateway_name" {
   description = "The name of the virtual network gateway. Changing this forces a new resource to be created."
@@ -98,10 +105,9 @@ variable "gateway_connection_shared_key" {
   default     = ""
 }
 
-variable "nsg_prefix" {
-  description = "The prefix of the network security group names. Changing this forces a new resource to be created."
-  default     = "hub"
-}
+# --------------------------------------------------------
+# Properties of domain subnet
+# --------------------------------------------------------
 
 variable "domain_subnet_name" {
   description = "The name of the domain subnet. Changing this forces a new resource to be created."
@@ -165,66 +171,13 @@ variable "domain_nsg_rules" {
   ]
 }
 
-variable "management_subnet_name" {
-  description = "The name of the domain subnet. Changing this forces a new resource to be created."
-  default     = "management"
-}
+# --------------------------------------------------------
+# Properties for default route table (in development)
+# --------------------------------------------------------
 
-variable "management_subnet_prefix" {
-  description = "The address prefix to associate to the domain subnet."
-  default     = "10.100.6.0/24"
-}
-
-variable "management_route_table_name" {
-  description = "The name of the domain subnet. Changing this forces a new resource to be created."
-  default     = "hub-network-management-route-table"
-}
-
-variable "management_nsg_name" {
-  description = "The name of the network security group. Changing this forces a new resource to be created."
-  default     = "hub-network-management-nsg"
-}
-
-variable "management_nsg_rules" {
-  description = ""
-  default     = [
-    {
-      name                        = "allow-https"
-      priority                    = "1000"
-      direction                   = "Inbound"
-      access                      = "Allow"
-      protocol                    = "Tcp"
-      source_port_ranges          = "*"
-      source_address_prefix       = "*"
-      destination_port_ranges     = "443"
-      destination_address_prefix  = "*"
-      description                 = "Allow HTTPS inbound"
-    },
-    {
-      name                        = "allow-http"
-      priority                    = "1010"
-      direction                   = "Inbound"
-      access                      = "Allow"
-      protocol                    = "Tcp"
-      source_port_ranges          = "*"
-      source_address_prefix       = "*"
-      destination_port_ranges     = "80"
-      destination_address_prefix  = "*"
-      description                 = "Allow HTTP inbound"
-    },
-    {
-      name                        = "allow-rdp"
-      priority                    = "1020"
-      direction                   = "Inbound"
-      access                      = "Allow"
-      protocol                    = "*"
-      source_port_ranges          = "*"
-      source_address_prefix       = "*"
-      destination_port_ranges     = "3389"
-      destination_address_prefix  = "*"
-      description                 = "Allow RDP inbound"
-    }
-  ]
+variable "nsg_resource_group_name" {
+  description = "The name of the resource group in which to create the network security groups."
+  default     = "hub-nsg-rg"
 }
 
 variable "route_table_resource_group_name" {
@@ -237,6 +190,10 @@ variable "route_table_default_gateway_ip_address" {
   default     = "10.100.0.4"
 }
 
+# --------------------------------------------------------
+# Define tags for the deployment
+# --------------------------------------------------------
+
 variable "tags" {
   description = "A mapping of tags to assign to the resource."
   type        = "map"
@@ -244,5 +201,6 @@ variable "tags" {
   default = {
     application = "vdc-hub"
     environment = "development"
+    buildagent = "github-actions"
   }
 }

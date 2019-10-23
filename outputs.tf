@@ -14,10 +14,6 @@ output "vnet_address_space_cluster" {
     value = "${module.hub_network.vnet_address_space}"
 }
 
-output "vnet_subnets_cluster" {
-    value = "${module.hub_network.vnet_subnets}"
-}
-
 output "firewall_id" {
   description = "The id of the firewall."
   value       = "${module.firewall.firewall_id}"

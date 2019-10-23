@@ -22,8 +22,3 @@ output "vnet_address_space" {
   description = "The address space of the virtual network."
   value       = "${azurerm_virtual_network.vnet.address_space}"
 }
-
-output "vnet_subnets" {
-  description = "The ids of subnets inside the virtual network."
-  value       = "${azurerm_subnet.subnet.*.id}"
-}
