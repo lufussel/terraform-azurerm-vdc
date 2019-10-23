@@ -120,8 +120,8 @@ module "domain_subnet" {
 
   subnet_name               = "${var.domain_subnet_name}"
   subnet_prefix             = "${var.domain_subnet_prefix}"
-#   route_table_id            = "${module.default_route_table.route_table_id}"
-#   nsg_id                    = "${module.domain_subnet_network_security_group.nsg_id}"
+  route_table_id            = "${module.default_route_table.route_table_id}"
+  nsg_id                    = "${module.domain_subnet_network_security_group.nsg_id}"
 }
 
 module "domain_subnet_network_security_group" {
@@ -133,6 +133,36 @@ module "domain_subnet_network_security_group" {
   location                        = "${var.location}"
 
   rules                           = "${var.domain_nsg_rules}"
+
+  tags                            = "${var.tags}"
+}
+
+# --------------------------------------------------------
+# Properties of management subnet
+# --------------------------------------------------------
+
+module "management_subnet" {
+  source                    = "./modules/network-subnet"
+
+  vnet_name                 = "${module.hub_network.vnet_name}"
+
+  resource_group_name       = "${module.hub_network.resource_group_name}"
+
+  subnet_name               = "${var.management_subnet_name}"
+  subnet_prefix             = "${var.management_subnet_prefix}"
+  route_table_id            = "${module.default_route_table.route_table_id}"
+  nsg_id                    = "${module.management_subnet_network_security_group.nsg_id}"
+}
+
+module "management_subnet_network_security_group" {
+  source                          = "./modules/network-security-group-rules"
+
+  nsg_name                        = "${var.env}-${var.management_nsg_name}"
+
+  resource_group_name             = "${var.env}-${var.nsg_resource_group_name}"
+  location                        = "${var.location}"
+
+  rules                           = "${var.management_nsg_rules}"
 
   tags                            = "${var.tags}"
 }
